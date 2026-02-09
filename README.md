@@ -33,19 +33,51 @@ This project follows a **10-lesson incremental learning approach** to build a fu
 
 ---
 
-### 🔜 Lesson 2: Web App Manifest (Next)
-**Goal**: Make the app installable
+### ✅ Lesson 2: Web App Manifest - Installability
+**Status**: Complete
+**What was built**:
+- `manifest.json` with app metadata (name, colors, icons, display mode)
+- App icons: SVG source + PNG placeholders (192x192, 512x512)
+- Linked manifest in `index.html` with proper meta tags
+- Icon generation tools for future enhancement
+
+**Key Files**:
+- `manifest.json` - Web app manifest
+- `icons/icon.svg` - Scalable vector icon (primary)
+- `icons/icon-192x192.png` - Minimum size for PWA
+- `icons/icon-512x512.png` - Recommended size for PWA
+- `icons/generate-icons.html` - Browser-based icon generator
+- `icons/generate-pngs.js` - Node.js icon generator
+
+**How to verify**:
+1. Serve with a local server: `python -m http.server 8000`
+2. Open http://localhost:8000 in Chrome
+3. Open DevTools → Application → Manifest
+4. Check "Installable" section - should show install prompt available
+5. For full test: Click install icon in address bar
+
+**Key Manifest Properties Explained**:
+- `display: "standalone"` - Opens without browser UI (like native app)
+- `theme_color` - Colors the browser address bar on mobile
+- `background_color` - Splash screen color while loading
+- `start_url` - URL to open when app launches
+- `icons` - App icons for home screen, task switcher, etc.
+
+**Note**: PNG icons are minimal placeholders. For production, use icons/generate-icons.html or PWA Builder to create high-quality icons from the SVG.
+
+---
+
+### 🔜 Lesson 3: Service Worker Basics (Next)
+**Goal**: Understand service worker fundamentals
 **What to build**:
-- Create `manifest.json` with app metadata
-- Add app icons (192x192, 512x512)
-- Configure theme colors and display mode
-- Link manifest in `index.html`
+- Register a service worker
+- Implement lifecycle events (install, activate, fetch)
+- Add console logging to observe behavior
 
 **Verification checklist**:
-- [ ] Install prompt appears in browser
-- [ ] App installs to desktop/home screen
-- [ ] Opens in standalone window (no browser UI)
-- [ ] Lighthouse shows valid manifest
+- [ ] Service worker appears in DevTools
+- [ ] Status shows "activated and is running"
+- [ ] Lifecycle events logged in console
 
 ---
 
