@@ -67,22 +67,53 @@ This project follows a **10-lesson incremental learning approach** to build a fu
 
 ---
 
-### 🔜 Lesson 3: Service Worker Basics (Next)
-**Goal**: Understand service worker fundamentals
+### ✅ Lesson 3: Service Worker Basics - Registration & Lifecycle
+**Status**: Complete
+**What was built**:
+- Created `service-worker.js` with lifecycle event handlers
+- Registered service worker in `app.js` on page load
+- Implemented INSTALL, ACTIVATE, FETCH, and MESSAGE event listeners
+- Added comprehensive logging to observe lifecycle behavior
+- Set up update detection and automatic update checking
+
+**Key Files**:
+- `service-worker.js` - Service worker with lifecycle events
+- `app.js` (updated) - Service worker registration logic
+- `docs/service-worker-basics.md` - Complete guide to service workers
+
+**How to verify**:
+1. Serve with local server: `python -m http.server 8000`
+2. Open http://localhost:8000 in Chrome
+3. Open DevTools → Application → Service Workers
+4. Check status: should show "activated and is running"
+5. Open Console and filter by "service-worker" or "[SW]"
+6. Reload page and observe lifecycle events logged
+
+**Service Worker Lifecycle Observed**:
+- `install` → Fires when SW first discovered
+- `activate` → Fires when SW takes control
+- `fetch` → Fires for every network request (currently just logging)
+- `message` → Allows communication between page and SW
+
+**Next**: In Lesson 4, we'll add actual caching logic to these events!
+
+---
+
+### 🔜 Lesson 4: Cache API - Precaching (Next)
+**Goal**: Cache static assets for offline access
 **What to build**:
-- Register a service worker
-- Implement lifecycle events (install, activate, fetch)
-- Add console logging to observe behavior
+- Pre-cache app shell in install event
+- Serve from cache in fetch event (cache-first strategy)
+- Clean up old caches in activate event
 
 **Verification checklist**:
-- [ ] Service worker appears in DevTools
-- [ ] Status shows "activated and is running"
-- [ ] Lifecycle events logged in console
+- [ ] Cached files visible in DevTools → Cache Storage
+- [ ] Go offline → app still works
+- [ ] Resources served from service worker
 
 ---
 
 ### 📋 Upcoming Lessons
-- **Lesson 3**: Service Worker Basics (registration & lifecycle)
 - **Lesson 4**: Cache API (precaching static assets)
 - **Lesson 5**: Caching Strategies (cache-first, network-first)
 - **Lesson 6**: Offline Fallback Page

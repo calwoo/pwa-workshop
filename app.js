@@ -1,7 +1,49 @@
 /**
  * Task Manager PWA - Main Application Logic
  * Lesson 1: Foundation - LocalStorage-based task management
+ * Lesson 3: Service Worker Registration
  */
+
+// ===================================
+// Service Worker Registration (Lesson 3)
+// ===================================
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker
+            .register('/service-worker.js')
+            .then((registration) => {
+                console.log('✅ Service Worker registered successfully!');
+                console.log('Scope:', registration.scope);
+                console.log('Registration:', registration);
+
+                // Check for updates periodically (every hour)
+                setInterval(() => {
+                    registration.update();
+                }, 60 * 60 * 1000);
+
+                // Listen for service worker updates
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    console.log('🔄 New service worker found, installing...');
+
+                    newWorker.addEventListener('statechange', () => {
+                        console.log('Service Worker state changed:', newWorker.state);
+                    });
+                });
+            })
+            .catch((error) => {
+                console.error('❌ Service Worker registration failed:', error);
+            });
+
+        // Listen for controller changes (when a new SW takes control)
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            console.log('🔄 New service worker has taken control');
+        });
+
+    });
+} else {
+    console.warn('⚠️ Service Workers are not supported in this browser');
+}
 
 // ===================================
 // State Management
